@@ -254,4 +254,478 @@ import android.util.Log;
             db.execSQL(query);
             db.close();
         }
+        //student crud
+        public void addStudent(StudentBean studentBean) {
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            String query = "INSERT INTO student_table (student_firstname,student_lastname,student_mobilenumber,student_address,student_department,student_class) values ('"+
+                    studentBean.getStudent_firstname()+"', '"+
+                    studentBean.getStudent_lastname()+"','"+
+                    studentBean.getStudent_mobilenumber()+"', '"+
+                    studentBean.getStudent_address()+"', '"+
+                    studentBean.getStudent_department()+"', '"+
+                    studentBean.getStudent_class()+"')";
+            Log.d("query", query);
+            db.execSQL(query);
+            db.close();
+        }
+
+        public ArrayList<StudentBean> getAllStudent()
+        {
+            ArrayList<StudentBean> list = new ArrayList<StudentBean>();
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            String query = "SELECT * FROM student_table";
+            Cursor cursor = db.rawQuery(query, null);
+
+            if(cursor.moveToFirst())
+            {
+                do{
+                    StudentBean studentBean = new StudentBean();
+                    studentBean.setStudent_id(Integer.parseInt(cursor.getString(0)));
+                    studentBean.setStudent_firstname(cursor.getString(1));
+                    studentBean.setStudent_lastname(cursor.getString(2));
+                    studentBean.setStudent_mobilenumber(cursor.getString(3));
+                    studentBean.setStudent_address(cursor.getString(4));
+                    studentBean.setStudent_department(cursor.getString(5));
+                    studentBean.setStudent_class(cursor.getString(6));
+                    list.add(studentBean);
+                }while(cursor.moveToNext());
+            }
+            return list;
+        }
+
+        public ArrayList<StudentBean> getAllStudentByBranchYear(String branch,String year)
+        {
+            ArrayList<StudentBean> list = new ArrayList<StudentBean>();
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            String query = "SELECT * FROM student_table where student_department='"+branch+"' and student_class='"+year+"'";
+            Cursor cursor = db.rawQuery(query, null);
+
+            if(cursor.moveToFirst())
+            {
+                do{
+                    StudentBean studentBean = new StudentBean();
+                    studentBean.setStudent_id(Integer.parseInt(cursor.getString(0)));
+                    studentBean.setStudent_firstname(cursor.getString(1));
+                    studentBean.setStudent_lastname(cursor.getString(2));
+                    studentBean.setStudent_mobilenumber(cursor.getString(3));
+                    studentBean.setStudent_address(cursor.getString(4));
+                    studentBean.setStudent_department(cursor.getString(5));
+                    studentBean.setStudent_class(cursor.getString(6));
+                    list.add(studentBean);
+                }while(cursor.moveToNext());
+            }
+            return list;
+        }
+
+        public StudentBean getStudentById(int studentId)
+        {
+            StudentBean studentBean = new StudentBean();
+            SQLiteDatabase db = this.getWritableDatabase();
+            String query = "SELECT * FROM student_table where student_id="+studentId;
+            Cursor cursor = db.rawQuery(query, null);
+
+            if(cursor.moveToFirst())
+            {
+                do{
+
+                    studentBean.setStudent_id(Integer.parseInt(cursor.getString(0)));
+                    studentBean.setStudent_firstname(cursor.getString(1));
+                    studentBean.setStudent_lastname(cursor.getString(2));
+                    studentBean.setStudent_mobilenumber(cursor.getString(3));
+                    studentBean.setStudent_address(cursor.getString(4));
+                    studentBean.setStudent_department(cursor.getString(5));
+                    studentBean.setStudent_class(cursor.getString(6));
+
+                }while(cursor.moveToNext());
+            }
+            return studentBean;
+        }
+
+        public void deleteStudent(int studentId) {
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            String query = "DELETE FROM student_table WHERE student_id="+studentId ;
+
+            Log.d("query", query);
+            db.execSQL(query);
+            db.close();
+        }
+
+        //attendance session Table crud
+        public int addAttendanceSession(AttendanceSessionBean attendanceSessionBean) {
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            String query = "INSERT INTO attendance_session_table (attendance_session_faculty_id,attendance_session_department,attendance_session_class,attendance_session_date,attendance_session_subject) values ('"+
+                    attendanceSessionBean.getAttendance_session_faculty_id()+"', '"+
+                    attendanceSessionBean.getAttendance_session_department()+"','"+
+                    attendanceSessionBean.getAttendance_session_class()+"', '"+
+                    attendanceSessionBean.getAttendance_session_date()+"', '"+
+                    attendanceSessionBean.getAttendance_session_subject()+"')";
+            Log.d("query", query);
+            db.execSQL(query);
+
+            String query1= "select max(attendance_session_id) from attendance_session_table";
+            Cursor cursor = db.rawQuery(query1, null);
+
+            if(cursor.moveToFirst())
+            {
+                int sessionId = Integer.parseInt(cursor.getString(0));
+
+                return sessionId;
+            }
+
+
+            db.close();
+            return 0;
+        }
+
+        public ArrayList<AttendanceSessionBean> getAllAttendanceSession()
+        {
+            ArrayList<AttendanceSessionBean> list = new ArrayList<AttendanceSessionBean>();
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            String query = "SELECT * FROM attendance_session_table";
+            Cursor cursor = db.rawQuery(query, null);
+
+            if(cursor.moveToFirst())
+            {
+                do{
+                    AttendanceSessionBean attendanceSessionBean = new AttendanceSessionBean();
+                    attendanceSessionBean.setAttendance_session_id(Integer.parseInt(cursor.getString(0)));
+                    attendanceSessionBean.setAttendance_session_faculty_id(Integer.parseInt(cursor.getString(1)));
+                    attendanceSessionBean.setAttendance_session_department(cursor.getString(2));
+                    attendanceSessionBean.setAttendance_session_class(cursor.getString(3));
+                    attendanceSessionBean.setAttendance_session_date(cursor.getString(4));
+                    attendanceSessionBean.setAttendance_session_subject(cursor.getString(5));
+                    list.add(attendanceSessionBean);
+                }while(cursor.moveToNext());
+            }
+            return list;
+        }
+
+        public void deleteAttendanceSession(int attendanceSessionId) {
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            String query = "DELETE FROM attendance_session_table WHERE attendance_session_id="+attendanceSessionId ;
+
+            Log.d("query", query);
+            db.execSQL(query);
+            db.close();
+        }
+        //attendance crud
+        public void addNewAttendance(AttendanceBean attendanceBean) {
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            String query = "INSERT INTO attendance_table values ("+
+                    attendanceBean.getAttendance_session_id()+", "+
+                    attendanceBean.getAttendance_student_id()+", '"+
+                    attendanceBean.getAttendance_status()+"')";
+            Log.d("query", query);
+            db.execSQL(query);
+            db.close();
+        }
+
+
+        public ArrayList<AttendanceBean> getAttendanceBySessionID(AttendanceSessionBean attendanceSessionBean)
+        {
+            int attendanceSessionId=0;
+            ArrayList<AttendanceBean> list = new ArrayList<AttendanceBean>();
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            String query = "SELECT * FROM attendance_session_table where attendance_session_faculty_id="+attendanceSessionBean.getAttendance_session_faculty_id()+""
+                    +" AND attendance_session_department='"+attendanceSessionBean.getAttendance_session_department()+"' AND attendance_session_class='"+attendanceSessionBean.getAttendance_session_class()+"'" +
+                    " AND attendance_session_date='"+attendanceSessionBean.getAttendance_session_date()+"' AND attendance_session_subject='"+attendanceSessionBean.getAttendance_session_subject()+"'";
+            Cursor cursor = db.rawQuery(query, null);
+
+            if(cursor.moveToFirst())
+            {
+                do{
+                    attendanceSessionId=(Integer.parseInt(cursor.getString(0)));
+                }while(cursor.moveToNext());
+            }
+
+            String query1="SELECT * FROM attendance_table where attendance_session_id=" + attendanceSessionId+" order by attendance_student_id";
+            Cursor cursor1 = db.rawQuery(query1, null);
+            if(cursor1.moveToFirst())
+            {
+                do{
+                    AttendanceBean attendanceBean = new AttendanceBean();
+                    attendanceBean.setAttendance_session_id(Integer.parseInt(cursor1.getString(0)));
+                    attendanceBean.setAttendance_student_id(Integer.parseInt(cursor1.getString(1)));
+                    attendanceBean.setAttendance_status(cursor1.getString(2));
+                    list.add(attendanceBean);
+
+                }while(cursor1.moveToNext());
+            }
+            return list;
+        }
+
+        public ArrayList<AttendanceBean> getTotalAttendanceBySessionID(AttendanceSessionBean attendanceSessionBean)
+        {
+            int attendanceSessionId=0;
+            ArrayList<AttendanceBean> list = new ArrayList<AttendanceBean>();
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            String query = "SELECT * FROM attendance_session_table where attendance_session_faculty_id="+attendanceSessionBean.getAttendance_session_faculty_id()+""
+                    +" AND attendance_session_department='"+attendanceSessionBean.getAttendance_session_department()+"' AND attendance_session_class='"+attendanceSessionBean.getAttendance_session_class()+"'" +
+                    " AND attendance_session_subject='"+attendanceSessionBean.getAttendance_session_subject()+"'";
+            Cursor cursor = db.rawQuery(query, null);
+
+            if(cursor.moveToFirst())
+            {
+                do{
+                    attendanceSessionId=(Integer.parseInt(cursor.getString(0)));
+
+                    String query1="SELECT * FROM attendance_table where attendance_session_id=" + attendanceSessionId+" order by attendance_student_id";
+                    Cursor cursor1 = db.rawQuery(query1, null);
+                    if(cursor1.moveToFirst())
+                    {
+                        do{
+                            AttendanceBean attendanceBean = new AttendanceBean();
+                            attendanceBean.setAttendance_session_id(Integer.parseInt(cursor1.getString(0)));
+                            attendanceBean.setAttendance_student_id(Integer.parseInt(cursor1.getString(1)));
+                            attendanceBean.setAttendance_status(cursor1.getString(2));
+                            list.add(attendanceBean);
+
+                        }while(cursor1.moveToNext());
+                    }
+
+                    AttendanceBean attendanceBean = new AttendanceBean();
+                    attendanceBean.setAttendance_session_id(0);
+                    attendanceBean.setAttendance_status("Date : " + cursor.getString(4));
+                    list.add(attendanceBean);
+
+                }while(cursor.moveToNext());
+            }
+
+
+            return list;
+        }
+
+        public ArrayList<AttendanceBean> getAllAttendanceByStudent()
+        {
+            ArrayList<AttendanceBean> list = new ArrayList<AttendanceBean>();
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            String query = "SELECT attendance_student_id,count(*) FROM attendance_table where attendance_status='P' group by attendance_student_id";
+
+            Log.d("query", query);
+
+            Cursor cursor = db.rawQuery(query, null);
+
+
+
+            if(cursor.moveToFirst())
+            {
+                do{
+                    Log.d("studentId","studentId:"+cursor.getString(0)+", Count:"+cursor.getString(1));
+                    AttendanceBean attendanceBean = new AttendanceBean();
+                    attendanceBean.setAttendance_student_id(Integer.parseInt(cursor.getString(0)));
+                    attendanceBean.setAttendance_session_id(Integer.parseInt(cursor.getString(1)));
+                    list.add(attendanceBean);
+
+                }while(cursor.moveToNext());
+            }
+            return list;
+        }
+	/*public ArrayList<AttendanceBean> getAllAttendanceBySessionID(int sessionId)
+	{
+		ArrayList<AttendanceBean> list = new ArrayList<AttendanceBean>();
+
+		SQLiteDatabase db = this.getWritableDatabase();
+		String query = "SELECT * FROM attendance_table where attendance_session_id=" + sessionId;
+		Cursor cursor = db.rawQuery(query, null);
+
+		if(!cursor.moveToFirst())
+		{
+			do{
+				AttendanceBean attendanceBean = new AttendanceBean();
+				attendanceBean.setAttendance_session_id(Integer.parseInt(cursor.getString(0)));
+				attendanceBean.setAttendance_student_id(Integer.parseInt(cursor.getString(1)));
+				attendanceBean.setAttendance_status(cursor.getString(2));
+				list.add(attendanceBean);
+
+			}while(cursor.moveToNext());
+		}
+		return list;
+	}*/
+
+
+
+
+        // Creating Tables
+	/*@Override
+	public void onCreate(SQLiteDatabase db) {
+		String CREATE_User_Info_TABLE = "CREATE TABLE " + TABLE_INFO_USER + "("
+				+ KEY_ID + " INTEGER PRIMARY KEY, " + KEY_FIRSTNAME + " TEXT, "+ KEY_LASTNAME + " TEXT, " +KEY_MO_NO +" TEXT, "
+				+KEY_EMAIL +" TEXT, " +KEY_USERNAME +" TEXT, " + KEY_PASSWORD +" TEXT " + ")";
+
+		Log.d("rupali",CREATE_User_Info_TABLE );
+		db.execSQL(CREATE_User_Info_TABLE);
+	}
+
+	// Upgrading database
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		// Drop older table if existed
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_INFO_USER);
+
+		// Create tables again
+		onCreate(db);
+	}
+
+	 *//**
+         * All CRUD(Create, Read, Update, Delete) Operations
+         *//*
+
+
+
+	void addUserInfo(UserInfo userinfo) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_FIRSTNAME, userinfo.getUser_Firstname()); //  Name
+		values.put(KEY_LASTNAME, userinfo.getUser_Lastname()); //  Name
+		values.put(KEY_MO_NO, userinfo.getUser_MobileNo()); // Contact Phone
+		values.put(KEY_EMAIL, userinfo.getUser_EmailId());
+		values.put(KEY_USERNAME, userinfo.getUser_Username());
+		values.put(KEY_PASSWORD, userinfo.getUser_Password());
+
+		// Inserting Row
+		db.insert(TABLE_INFO_USER, null, values);
+		//2nd argument is String containing nullColumnHack
+		db.close(); // Closing database connection
+	}
+
+
+	// Getting single contact
+	UserInfo getUserInfo(int id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor cursor = db.query(TABLE_INFO_USER, new String[] { KEY_ID,
+				KEY_FIRSTNAME, KEY_LASTNAME,KEY_MO_NO,  KEY_EMAIL, KEY_USERNAME, KEY_PASSWORD }, KEY_ID + "=?",
+				new String[] { String.valueOf(id) }, null, null, null, null);
+		if (cursor != null)
+			cursor.moveToFirst();
+
+		UserInfo userinfo = new UserInfo(Integer.parseInt(cursor.getString(0)),
+				cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4),cursor.getString(5),cursor.getString(6));
+		// return contact
+				return userinfo;
+	}
+
+	public UserInfo validateUser(String username, String password)
+	{
+		SQLiteDatabase db = this.getReadableDatabase();
+		String query = "Select * from User_Info_Table WHERE User_Username='"+ username +"' AND User_Password='"+password+"'";
+		Log.d("Rupali", "Login QUERY:" + query);
+
+		Cursor cursor = db.rawQuery(query, null);
+
+
+		if(!cursor.moveToFirst())
+		{
+			Log.d("Rupali", "cursor is null.. returing NULL");
+			return null;
+		}
+		Log.d("Rupali", "cursor is NOT null.. we got user data...");
+
+
+		UserInfo userinfo = new UserInfo(Integer.parseInt(cursor.getString(0)),
+				cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4),cursor.getString(5),cursor.getString(6));
+
+		return userinfo;
+	}
+
+	// Updating single contact
+	public int updateUserPassword(UserInfo userinfo) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_PASSWORD, userinfo.getUser_Password());
+
+
+		// updating row
+		return db.update(TABLE_INFO_USER, values, KEY_ID + " = ?",
+				new String[] { String.valueOf(userinfo.getUser_id()) });
+	}
+
+	public int updateUserContact(UserInfo userinfo) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_MO_NO, userinfo.getUser_MobileNo());
+		values.put(KEY_EMAIL, userinfo.getUser_EmailId());
+
+
+		// updating row
+		return db.update(TABLE_INFO_USER, values, KEY_ID + " = ?",
+				new String[] { String.valueOf(userinfo.getUser_id()) });
+	}
+
+
+	//veiw details
+
+	public UserInfo viewUserInfo(String id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		String query = "Select * from User_Info_Table WHERE id='"+id+"'";
+		Cursor cursor = db.rawQuery(query, null);
+		if(!cursor.moveToFirst())
+		{
+			Log.d("Rupali", "cursor is null.. returing NULL");
+			return null;
+		}
+		Log.d("Rupali", "cursor is NOT null.. we got user data...");
+
+		UserInfo userinfo = new UserInfo(Integer.parseInt(cursor.getString(0)),
+				cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4),cursor.getString(5),cursor.getString(6));
+		// return contact
+		return userinfo;
+	}
+
+
+
+	 // Getting All users
+    public List<UserInfo> getAllUserInfo() {
+        List<UserInfo> userinfolist = new ArrayList<UserInfo>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_INFO_USER;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+
+                UserInfo userinfo=new UserInfo();
+
+                userinfo.setUser_id(Integer.parseInt(cursor.getString(0)));
+                userinfo.setUser_Lastname(cursor.getString(2));
+                userinfo.setUser_Username(cursor.getString(5));
+                userinfo.setUser_Firstname(cursor.getString(1));
+
+
+
+                // Adding contact to list
+                userinfolist.add(userinfo);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return userinfolist;
+    }
+
+    // Deleting single contact
+    public void deleteUser(UserInfo userinfo) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_INFO_USER, KEY_ID + " = ?",
+                new String[] { String.valueOf(userinfo.getUser_id()) });
+        db.close();
+    }
+	  */
     }
