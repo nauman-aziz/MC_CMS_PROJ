@@ -81,6 +81,7 @@ public class ViewStudentByBranchYear extends AppCompatActivity {
                         studentBeanList=dbAdapter.getAllStudentByBranchYear(branch, year);
 
                         for(StudentBean studentBean : studentBeanList)
+
                         {
                             String users = " FirstName: " + studentBean.getStudent_firstname()+"\nLastname:"+studentBean.getStudent_lastname();
                             studentList.add(users);
