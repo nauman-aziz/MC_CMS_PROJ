@@ -30,6 +30,7 @@ public class ViewStudentByBranchYear extends AppCompatActivity {
 
 
 
+
     DBAdapter dbAdapter = new DBAdapter(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
