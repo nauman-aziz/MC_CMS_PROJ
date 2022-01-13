@@ -32,6 +32,7 @@ public class ViewStudentByBranchYear extends AppCompatActivity {
 
     DBAdapter dbAdapter = new DBAdapter(this);
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.__listview_main);
