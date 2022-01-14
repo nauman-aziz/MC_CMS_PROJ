@@ -9,6 +9,7 @@
         <entry key="..\:/Users/mrhas/AndroidStudioProjects/MC_CMS_PROJ/app/src/main/res/layout/add_attandance.xml" value="0.30052083333333335" />
         <entry key="..\:/Users/mrhas/AndroidStudioProjects/MC_CMS_PROJ/app/src/main/res/layout/add_student_attendance.xml" value="0.1609375" />
         <entry key="..\:/Users/mrhas/AndroidStudioProjects/MC_CMS_PROJ/app/src/main/res/layout/addfaculty.xml" value="0.1609375" />
+        <entry key="..\:/Users/mrhas/AndroidStudioProjects/MC_CMS_PROJ/app/src/main/res/layout/menu.xml" value="0.175" />
         <entry key="..\:/Users/mrhas/AndroidStudioProjects/MC_CMS_PROJ/app/src/main/res/layout/test_layout.xml" value="0.1609375" />
         <entry key="..\:/Users/mrhas/AndroidStudioProjects/MC_CMS_PROJ/app/src/main/res/layout/view_attendance_list.xml" value="0.1609375" />
         <entry key="..\:/Users/mrhas/AndroidStudioProjects/MC_CMS_PROJ/app/src/main/res/layout/viewstudent.xml" value="0.11018518518518519" />
@@ -16,7 +17,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
