@@ -1,5 +1,6 @@
 package com.nomi.cms_mc_proj.activity;
 
+<<<<<<< HEAD
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -118,3 +119,20 @@ public class ViewFacultyActivity extends Activity {
 	}
 
 }
+=======
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+import com.nomi.cms_mc_proj.R;
+
+public class ViewFacultyActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_view_faculty);
+    }
+
+}
+>>>>>>> 626594ed68b05cd3c55f2efa14adaf65da932bf2
