@@ -1,6 +1,7 @@
-package com.nomi.cms_mc_proj.activity;
+package com.android.attendance.activity;
 
-<<<<<<< HEAD
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,12 +19,10 @@ import com.nomi.cms_mc_proj.bean.FacultyBean;
 import com.nomi.cms_mc_proj.db.DBAdapter;
 import com.nomi.cms_mc_proj.R;
 
-import java.util.ArrayList;
-
 public class ViewFacultyActivity extends Activity {
 
 	ArrayList<FacultyBean> facultyBeanList;
-	private ListView listView ;  
+	private ListView listView ;
 	private ArrayAdapter<String> listAdapter;
 
 	DBAdapter dbAdapter = new DBAdapter(this);
@@ -40,20 +39,20 @@ public class ViewFacultyActivity extends Activity {
 		for(FacultyBean facultyBean : facultyBeanList)
 		{
 			String users = " FirstName: " + facultyBean.getFaculty_firstname()+"\nLastname:"+facultyBean.getFaculty_lastname();
-				
+
 			facultyList.add(users);
-			Log.d("users: ", users); 
+			Log.d("users: ", users);
 
 		}
 
 		listAdapter = new ArrayAdapter<String>(this, R.layout.view_faculty_list, R.id.labelF, facultyList);
-		listView.setAdapter( listAdapter ); 
+		listView.setAdapter( listAdapter );
 
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-					final int position, long arg3) {
+										   final int position, long arg3) {
 
 
 
@@ -67,7 +66,7 @@ public class ViewFacultyActivity extends Activity {
 
 						facultyList.remove(position);
 						listAdapter.notifyDataSetChanged();
-						listAdapter.notifyDataSetInvalidated();   
+						listAdapter.notifyDataSetInvalidated();
 
 						dbAdapter.deleteFaculty(facultyBeanList.get(position).getFaculty_id());
 						facultyBeanList=dbAdapter.getAllFaculty();
@@ -76,18 +75,18 @@ public class ViewFacultyActivity extends Activity {
 						{
 							String users = " FirstName: " + facultyBean.getFaculty_firstname()+"\nLastname:"+facultyBean.getFaculty_lastname();
 							facultyList.add(users);
-							Log.d("users: ", users); 
+							Log.d("users: ", users);
 
 						}
-						
+
 					}
-					
+
 				});
 				alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog,int id) {
 						// cancel the alert box and put a Toast to the user
 						dialog.cancel();
-						Toast.makeText(getApplicationContext(), "You choose cancel", 
+						Toast.makeText(getApplicationContext(), "You choose cancel",
 								Toast.LENGTH_LONG).show();
 					}
 				});
@@ -119,20 +118,3 @@ public class ViewFacultyActivity extends Activity {
 	}
 
 }
-=======
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
-import com.nomi.cms_mc_proj.R;
-
-public class ViewFacultyActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_faculty);
-    }
-
-}
->>>>>>> 626594ed68b05cd3c55f2efa14adaf65da932bf2
