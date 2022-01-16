@@ -17,6 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nomi.cms_mc_proj.R;
+import com.nomi.cms_mc_proj.bean.FacultyBean;
+import com.nomi.cms_mc_proj.context.ApplicationContext;
+import com.nomi.cms_mc_proj.db.DBAdapter;
 
 public class LoginActivity extends AppCompatActivity {
 
