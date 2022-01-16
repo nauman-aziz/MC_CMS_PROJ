@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     String userrole;
     private String[] userRoleString = new String[] { "admin", "faculty"};
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
