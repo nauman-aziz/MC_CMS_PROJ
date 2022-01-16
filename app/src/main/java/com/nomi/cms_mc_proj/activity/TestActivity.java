@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.android.attendance.bean.AttendanceSessionBean;
-import com.android.attendance.db.DBAdapter;
-import com.example.androidattendancesystem.R;
+import com.nomi.cms_mc_proj.bean.AttendanceSessionBean;
+import com.nomi.cms_mc_proj.db.DBAdapter;
+import com.nomi.cms_mc_proj.R;
 
 import java.util.ArrayList;
 
