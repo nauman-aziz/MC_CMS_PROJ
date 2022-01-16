@@ -2,7 +2,6 @@ package com.nomi.cms_mc_proj.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,7 +10,7 @@ import android.widget.Button;
 
 import com.nomi.cms_mc_proj.R;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
 
     Button start;
