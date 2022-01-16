@@ -18,6 +18,7 @@ public class ViewAttandanceActivity extends AppCompatActivity {
 
     Spinner spinnerbranch,spinneryear;
     String userrole,branch,year;
+
     private String[] branchString = new String[] { "cse"};
     private String[] yearString = new String[] {"SE","TE","BE"};
 
