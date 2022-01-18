@@ -25,6 +25,7 @@ public class ViewAttandanceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.viewstudent);
 
         spinnerbranch=(Spinner)findViewById(R.id.spinnerbranchView);
