@@ -46,6 +46,7 @@ public class ViewAttendanceByFacultyActivity extends Activity {
 			{
 				users = attendanceBean.getAttendance_status();
 			}
+
 			
 			attendanceList.add(users);
 			Log.d("users: ", users); 
@@ -53,7 +54,9 @@ public class ViewAttendanceByFacultyActivity extends Activity {
 		}
 
 		listAdapter = new ArrayAdapter<String>(this, R.layout.view_attendance_list, R.id.labelAttendance, attendanceList);
-		listView.setAdapter( listAdapter ); 
+		listView.setAdapter( listAdapter );
+
+
 
 		/*listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
